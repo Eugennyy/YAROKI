@@ -1,0 +1,1851 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+    
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: 'Oswald', sans-serif
+
+a
+    text-decoration: none
+    outline: none
+
+ul, ol, li
+    list-style-type: none
+
+%flexOptions
+    display: flex
+    justify-content: center
+    align-items: center
+
+%backgroundOptions
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: center center
+
+$blueColor: #005071
+
+$skyColor: #3c5fca
+
+$blackColor: #303030
+
+%accordeonAfterOptions
+    position: absolute
+    right: 0
+    padding-right: 20px
+    font-size: 21px
+    color: white
+
+%buttonOptions
+    border: 2px solid $blueColor
+    border-radius: 5px
+    outline: none
+    background-color: $blueColor
+    padding: 13px 18.5px 13px 18.5px
+    color: white
+    cursor: pointer
+    font-size: 16.5px
+    letter-spacing: 0.5px
+    text-transform: uppercase
+    transition-property: background-color, border-radius
+    transition: .3s linear
+
+%formButtonOptions
+    width: 100%
+    outline: none
+    border-radius: 5px
+    cursor: pointer
+    color: white
+    letter-spacing: 0.5px
+    text-transform: uppercase
+    font-size: 15.5px
+    transition-property: background-color, border-radius, color
+    transition: .3s linear
+
+%modalOptions
+    max-width: 750px
+    width: 100%
+    @extend %flexOptions
+    flex-direction: column
+    border-radius: 7px
+    background-color: white
+    position: relative
+    padding: 15px 0 20px 0
+    visibility: hidden
+    transform: translateX(-160%)
+
+%inputOptions
+    background-color: $blackColor
+    border-radius: 3px
+    outline: none
+    color: white
+    border: none
+    font-size: 16px
+    cursor: pointer
+    padding: 15px
+    transition: background-color .3s linear
+
+%inputBlockOptions
+    display: flex
+    align-items: center
+    padding-top: 9.5px
+    position: relative
+
+%substrateOptions
+    @extend %flexOptions
+    width: 100%
+    height: 100vh
+    position: fixed
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+
+body
+    width: 100%
+    height: 100vh
+    overflow: hidden !important
+    position: fixed
+
+.preloader
+    @extend %substrateOptions
+    background-color: #fff
+    z-index: 999999
+    user-select: none
+
+    &__content
+        @extend %flexOptions
+        width: 350px
+        height: 250px
+        background-color: transparent 
+        margin: 0 auto
+        position: relative
+        font-size: 25px
+        color: $blackColor
+    &__box
+        width: 75px
+        height: 75px
+        animation: firstBox 2.5s infinite
+        background-color: $blueColor
+        position: absolute
+        transform-origin: center
+        top: 0
+        left: 0
+
+        &_animation
+            top: auto
+            left: auto
+            right: 0
+            bottom: 0
+            animation: secondBox 2.5s infinite
+
+.mainSlider
+    &__item
+        @extend %backgroundOptions
+        width: 100%
+        height: 100vh
+        position: relative
+
+        &:first-child
+            background-image: url(../img/backgroundMain-1.jpg)
+        &:nth-child(2)
+            background-image: url(../img/backgroundMain-2.jpg)
+        &:nth-child(3)
+            background-image: url(../img/backgroundMain-3.jpg)
+        &:last-child
+            background-image: url(../img/backgroundMain-4.jpg)
+
+.logo
+    display: flex
+    position: absolute
+    top: 35px
+    left: 0
+    width: 230px
+    min-height: 115px
+
+    &__item
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        width: 100%
+        background-color: $blueColor
+
+        &:first-child
+            background-color: white
+        
+    &__img
+        width: 100%
+        pointer-events: none
+        user-select: none
+        transform: scale(1.15)
+    &__title
+        letter-spacing: 1.1px
+        font-size: 18px
+        color: white
+        user-select: none
+        text-align: center
+
+.mode
+    padding: 12.5px
+    @extend %flexOptions
+    max-width: 50px
+    width: 100%
+    cursor: pointer
+    z-index: 999999
+    position: absolute
+    background-color: $blackColor
+    top: 160px
+    left: 0
+
+    &__icon
+        color: rgb(255,242,237)
+        font-size: 18.5px
+
+.main
+    display: flex
+    justify-content: center
+
+    &__container
+        max-width: 1400px
+        width: 100%
+        position: absolute
+        bottom: calc(10px + 3vh)
+    &__title
+        font-size: 100px
+        color: #fff
+        line-height: 90px
+        user-select: none
+        letter-spacing: 1px
+        padding-bottom: 5px
+    &__menu
+        display: flex
+        width: 100%
+        user-select: none
+    &__item
+        width: 25%
+        text-align: center
+        padding: 15px 0
+        color: rgba(255, 255, 255, .5)
+        cursor: pointer
+        border-top: 1px solid rgba(255, 255, 255, .5)
+        border-bottom: 1px solid rgba(255, 255, 255, .5)
+        transition-property: color, border
+        transition: .3s linear
+
+        &:hover
+            border-top: 1px solid white
+            border-bottom: 1px solid white
+            color: white
+
+        &_active
+            border-top: 1px solid white !important
+            border-bottom: 1px solid white !important
+            color: white !important
+
+    &__span
+        width: 100%
+        display: inline-block
+        font-size: 32px
+        line-height: 70px
+        border-right: 1px solid rgba(255, 255, 255, .5)
+
+        &_noBorder
+            border-right: none
+
+.full-screen-substrate
+    display: none
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: transparent
+
+    &_active
+        display: block
+        animation: enableSubstrate .6s forwards
+    &_notActive
+        display: none
+        animation: none
+
+.buttonUp
+    @extend %flexOptions
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    border: 2px solid $blueColor
+    cursor: pointer
+    position: fixed
+    right: 45px
+    bottom: 45px
+    outline: none
+    z-index: 999999999
+    transition: background-color .2s linear
+
+    &:hover 
+        background-color: $blueColor
+    &:hover .content__arrow
+        color: white
+
+.content
+    width: 100%
+    height: 100%
+    visibility: hidden
+    position: absolute
+    top: auto
+    bottom: 0
+    left: 0
+    right: 0
+    background-color: #fff
+    overflow-y: overlay
+    overflow-x: hidden
+    transform: translateY(100%)
+    z-index: 99999999
+
+    &__submain
+        max-width: 1100px
+        margin: 0 auto
+        padding-top: 30px
+        position: relative
+
+        &_increasedWidth
+            max-width: 1200px
+
+    &__caption
+        display: flex
+        align-items: center
+    &__circle, &__modalCircle
+        @extend %flexOptions
+        border-radius: 50%
+        width: 35px
+        height: 35px
+        border: 1px solid $blueColor
+        cursor: pointer
+        transition: background-color .2s linear
+
+        &:hover
+            background-color: $blueColor
+        &:hover .content__arrow
+            color: white
+        &:hover .content__back
+            color: white
+
+    &__arrow, &__back
+        color: $blueColor
+        font-size: 18px
+        transition: color .2s linear
+
+        &_style
+            font-size: 14.5px
+            color: white
+            position: absolute
+            top: 10px
+            right: 10px
+            cursor: pointer
+
+            &:hover
+                color: #748cd4
+
+    &__title
+        color: $blueColor
+        font-size: 50px
+        padding-left: 15px
+    &__text
+        color: $blackColor
+        font-size: 19px
+        padding: 15px 0 0 50px
+    &__h2
+        color: $blueColor
+        font-size: 35px
+        text-align: center
+        padding-top: 20px
+    &__features
+        display: flex
+        justify-content: space-evenly
+        padding: 55px 0 10px 0
+    &__feature
+        @extend %flexOptions
+        flex-direction: column
+    &__span
+        display: block
+        color: $blackColor
+        font-size: 23px
+        text-align: center
+    &__icon
+        font-size: 70px
+        color: $blackColor
+    &__note
+        color: $blackColor
+        font-size: 20px
+        padding-top: 5px
+        text-decoration: underline
+    &__brands
+        padding: 25px 0 15px 0
+    &__accordeons
+        padding-top: 10px
+    &__accordeon
+        @extend %flexOptions
+        flex-direction: column
+        width: 60%
+        margin: 0 auto
+        position: relative
+        user-select: none
+    &__message
+        display: none
+        position: fixed
+        top: 25px
+        right: 50px
+        color: white
+        background-color: $blackColor
+        font-size: 16.5px
+        padding: 3px
+        z-index: 999999999
+        border-radius: 5px
+        padding: 10px 15px 10px 15px
+    &__extraSpan
+        padding-right: 17.5px
+    &__triangle
+        position: absolute
+        top: -15px
+        border-left: 10px solid transparent
+        border-right: 10px solid transparent
+        border-bottom: 15px solid $blackColor
+    &__question
+        width: 100%
+        background-color: $skyColor
+        border-radius: 3px
+        padding: 20px
+        font-size: 19.5px
+        cursor: pointer
+        color: white
+        font-weight: normal
+        position: relative
+        border-bottom: 1px solid white
+        transition: background-color .3s linear
+
+        &:hover
+            background-color: $blueColor
+        &:after
+            content: '+'
+            @extend %accordeonAfterOptions
+
+        &_active
+            background-color: $blueColor !important
+
+            &:after
+                content: '-'
+                @extend %accordeonAfterOptions
+
+    &__list
+        width: 100%
+    &__item
+        font-size: 17px
+        padding: 18px
+        background-color: $blackColor
+        color: white
+        border-radius: 3px
+    &__map
+        padding-top: 15px
+    &__form
+        width: 60%
+        margin: 0 auto
+        padding-bottom: 15px
+        user-select: none
+    &__inputs
+        width: 100%
+        padding-top: 9.5px
+    &__input
+        border: none
+        border-radius: 3px
+        outline: none
+        width: 100%
+        padding: 18px 15px 18px 15px
+        font-size: 17px
+        cursor: pointer
+        resize: none
+        background-color: $blackColor
+        color: white
+        transition: background-color .3s linear
+
+        &::placeholder
+            color: white
+        &:hover
+            background-color: $skyColor
+        &:focus
+            cursor: text
+            background-color: $skyColor !important
+
+    &__btn
+        display: flex
+        align-items: center
+        padding-top: 15px
+    &__submit
+        @extend %buttonOptions
+        transition-property: background-color, border-radius, color
+        user-select: none
+
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+            color: $blackColor
+
+    &__links
+        display: flex
+    &__link
+        padding-right: 7.5px
+
+        &:first-child
+            padding-left: 15px
+        &:last-child
+            padding-right: 0
+
+    &__ref
+        @extend %flexOptions
+        background-color: $blackColor
+        width: 35px
+        height: 35px
+        border-radius: 50%
+        transition: background-color .3s linear
+
+        &:hover
+            background-color: $blueColor
+
+    &__socialIcon
+        font-size: 18.5px 
+        color: white
+    &__brand
+        display: block
+        margin: 0 auto
+        max-width: 100px
+        width: 100%
+        margin-top: 45px
+        user-select: none
+
+        &:first-child
+            margin-top: 0
+
+    &__catalog
+        padding: 15px 0 20px 0
+    &__cars
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
+    &__car
+        min-width: 370px
+        max-width: 370px
+        min-height: 244.4px
+        max-height: 244.4px
+        width: 100%
+        padding: 0 40px 0 40px
+        margin-top: 30px
+        position: relative
+        background-color: transparent
+        border-radius: 7px
+        transition: background-color .3s linear 
+        cursor: pointer
+        user-select: none
+
+        &:hover
+            background-color: rgba(0, 0, 0, .2)
+        &:hover .content__carModel
+            display: none
+        &:hover .content__carImg
+            opacity: .3
+            filter: blur(5px)
+        &:hover .content__cover
+            visibility: visible
+
+    &__carImg
+        width: 100%
+        height: 210px
+        transition-property: opacity, filter
+        transition: .3s linear
+    &__carModel
+        padding-left: 10px
+        font-size: 20px
+        color: $blueColor
+        font-weight: normal
+    &__cover
+        width: 100%
+        height: 100%
+        background-color: transparent
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        visibility: hidden
+    &__coverModel
+        color: $blueColor
+        font-weight: bold
+        font-size: 35px
+        padding: 20px 0 0 25px
+    &__coverInfo
+        display: flex
+        justify-content: space-around
+        color: $blueColor
+        padding-top: 15px
+    &__coverSpan
+        font-size: 16px
+    &__coverPrice, &__coverSpeed, &__coverWaste
+        font-size: 24.5px
+    &__coverPrice
+        padding: 0 0 20px 25px
+        color: #d52b1e
+    &__coverLine
+        width: 85%
+        height: 1px
+        background-color: rgba(0, 0, 0, .5)
+        margin: 0 auto
+    &__modalCover
+        @extend %substrateOptions
+        visibility: hidden
+
+        &_active
+            animation: enableModalCover .6s forwards
+        &_notActive
+            animation: disableModalCover .6s forwards
+
+    &__modal
+        @extend %modalOptions
+
+        &_active
+            animation: showModal 1s forwards
+        &_notActive
+            animation: hideModal 1s forwards
+        &_style
+            height: auto !important
+            position: unset !important
+            padding-top: 5px !important
+
+    &__modalTitle
+        display: flex
+        color: $blueColor
+        font-size: 21px
+        border-bottom: 2px solid $blueColor
+    &__modalModel
+        padding-left: 7px
+    &__modalPrice
+        display: flex
+        align-items: center
+        color: $blackColor
+        font-size: 21.5px
+        padding-top: 5px
+    &__modalCost
+        font-size: 16.5px
+    &__modalValue
+        color: red
+    &__modalCost, &__modalValue
+        padding-right: 5px
+    &__modalSelect
+        font-size: 15.5px
+        outline: none 
+        border: none
+        color: $blackColor
+        cursor: pointer  
+    &__modalImg
+        max-width: 290px
+        width: 100%
+        height: 210px
+        margin-top: 6.5px
+        user-select: none
+    &__modalAccordeon
+        width: 50%
+        padding: 15px 0 20px 0
+        user-select: none
+    &__modalChars
+        width: 100%
+        font-size: 17.5px
+        font-weight: normal
+        cursor: pointer
+        border-top-left-radius: 3px
+        border-top-right-radius: 3px
+        background-color: $skyColor
+        text-align: center
+        transition: background-color .3s linear
+        padding: 15px 0 15px 0
+        color: white
+        letter-spacing: .4px
+
+        &:hover
+            background-color: $blueColor
+        &_active
+            background-color: $blueColor !important
+
+    &__modalItem
+        display: flex
+        justify-content: space-around
+        background-color: $blackColor
+        line-height: 2.1
+        padding: 10px 0 10px 0
+        border-bottom-left-radius: 3px
+        border-bottom-right-radius: 3px
+    &__modalExtra
+        padding-right: 20px
+
+        &:last-child
+            padding-right: 0
+
+    &__modalChar
+        color: white
+        font-size: 16.5px
+    &__modalSpan
+        padding-left: 3px
+    &__modalCircle
+        position: absolute
+        top: 15px
+        right: 15px
+    &__modalButtons
+        user-select: none
+    &__modalBtn
+        background-color: $blueColor
+        border: 2px solid $blueColor
+        color: white
+        border-radius: 5px
+        outline: none
+        padding: 13px 18px 13px 18px
+        cursor: pointer
+        font-size: 16px
+        letter-spacing: 0.5px
+        text-transform: uppercase
+        transition-property: background-color, border-radius, color
+        transition: .3s linear
+        margin-right: 15px
+
+        &_style
+            background-color: limegreen
+            border: 2px solid limegreen
+            margin-right: 0
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+            color: $blackColor
+
+    &__accountForm
+        display: flex
+        align-items: center
+        flex-direction: column
+        width: 45%
+        margin: 0 auto
+        user-select: none
+        padding-top: 5px
+    &__accountInputs
+        width: 100%
+        @extend %inputBlockOptions
+    &__accountInput
+        width: 100%
+        @extend %inputOptions
+
+        &::placeholder
+            color: white
+        &:hover
+            background-color: $skyColor
+        &:focus
+            cursor: text
+            background-color: $skyColor !important
+
+    &__accountStay
+        display: flex
+        align-items: center
+        width: 100%
+        justify-content: space-between
+        padding: 20px 0 20px 0
+    &__accountLabel
+        font-size: 14px
+        padding-left: 5px
+        color: $blackColor
+        cursor: pointer
+    &__accountCheck
+        cursor: pointer
+    &__accountExtra
+        display: flex
+        align-items: center
+    &__accountHelp
+        color: $skyColor
+        font-size: 14px
+        cursor: pointer
+        transition: color .2s linear
+
+        &:hover
+            color: $blackColor
+
+    &__accountSubmit
+        @extend %formButtonOptions
+        border: 2px solid limegreen
+        background-color: limegreen
+        padding: 15px
+
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+            color: $blackColor
+
+    &__accountBlock
+        display: flex
+        width: 100%
+        justify-content: flex-end
+        padding-top: 10px
+    &__accountButton
+        @extend %formButtonOptions
+        width: 185px
+        border: 2px solid $blueColor
+        background-color: $blueColor
+        padding: 15px 10px 15px 10px
+
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+            color: $blackColor
+
+    &__accountIcon
+        padding-left: 1.5px
+    &__accountEye
+        position: absolute
+        right: 15px
+        color: white
+        cursor: pointer
+    &__modalAccount
+        @extend %modalOptions
+
+        &_active
+            animation: showModal 1s forwards
+        &_notActive
+            animation: hideModal 1s forwards
+
+    &__modalAccountSubmain
+        &_style
+            width: 100%
+        &_flex
+            display: flex
+            flex-direction: column
+            align-items: center
+            width: 100%
+
+    &__modalAccountTitle
+        font-size: 35px
+        color: $blueColor
+        text-align: center
+        padding-top: 15px
+    &__modalAccountCaption
+        font-size: 17.5px
+        padding: 6.5px 8px 6.5px 8px 
+        text-align: center
+    &__modalAccountForm
+        display: flex
+        flex-direction: column
+        align-items: center
+        width: 100%
+        padding: 10.5px 0 5px 0
+        user-select: none
+    &__modalAccountInputs
+        width: 66%
+        @extend %inputBlockOptions
+    &__modalAccountInput
+        width: 100%
+        @extend %inputOptions
+
+        &::placeholder
+            color: white
+        &:hover
+            background-color: $skyColor
+        &:focus
+            cursor: text
+            background-color: $skyColor !important
+
+    &__modalAccountSubmit
+        @extend %formButtonOptions
+        padding: 15px
+        border: 2px solid $blueColor
+        background-color: $blueColor
+        margin-top: 20px
+        width: 66%
+
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+            color: $blackColor
+
+    &__modalAccountExtra
+        display: flex
+        width: 66%
+        justify-content: flex-end
+        padding-top: 10px
+    &__modalAccountSpan
+        font-size: 14px
+        transition: color .2s linear
+        cursor: pointer
+
+        &:hover
+            color: $skyColor
+
+    &__signed
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        width: 100%
+        margin: 0 auto
+        padding-top: 25px
+        user-select: none
+    &__signedControls
+        display: flex
+    &__signedPic
+        display: flex
+        flex-direction: column
+        max-width: 200px
+        width: 100%
+    &__signedPhoto
+        max-width: 200px
+        width: 100%
+        height: 200px
+        object-fit: cover
+        border: 1.5px solid $blackColor
+    &__signedSetPhoto
+        width: 100%
+    &__signedExtra
+        padding-top: 10px  
+    &__signedInfo
+        width: 100%
+        padding-left: 30px
+    &__signedFootnote
+        display: block
+        padding-bottom: 5px
+        color: $blackColor
+    &__signedInputs
+        width: 100%
+        padding-top: 15px
+
+        &:first-child
+            padding-top: 4px
+        &_style
+            display: flex
+            justify-content: space-between
+        &_align
+            text-align: end
+
+    &__signedInput
+        width: 100%
+        @extend %inputOptions
+
+        &::placeholder
+            color: white
+        &:hover
+            background-color: $skyColor
+        &:focus
+            cursor: text
+            background-color: $skyColor !important
+        &_disabled
+            opacity: .5
+            cursor: default
+
+            &:hover
+                background-color: $blackColor
+
+    &__signedDelete
+        color: $blackColor
+        font-size: 16.5px
+        cursor: pointer
+        transition: color .2s linear 
+
+        &:hover
+            color: red
+
+    &__signedButton
+        @extend %formButtonOptions
+        width: 165px
+        border: 2px solid $blueColor
+        background-color: $blueColor
+        padding: 15px 10px 15px 10px
+
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+            color: $blackColor
+        &:last-child
+            margin-left: 25px
+
+    &__signedBtn
+        padding-top: 20px
+        max-width: 588.5px
+        width: 100%
+    &__signedExit
+        @extend %formButtonOptions
+        border: 2px solid red
+        background-color: red
+        padding: 15px
+
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+            color: $blackColor
+
+.slider
+    position: relative
+    
+    &__img
+        width: 100%
+        max-height: 600px
+        object-fit: cover
+    &__content
+        position: absolute
+        transform: perspective(600px)
+        z-index: 999999
+    &__brand
+        max-width: 500px
+        max-height: 375px
+        width: 100%
+        height: 100%
+    &__lines
+        display: flex
+        justify-content: center
+        padding: 5px 0 15px 0
+    &__line
+        width: 85px
+        height: 1.7px
+        background-color: white
+    &__btn
+        display: flex
+        justify-content: center
+    &__button
+        @extend %buttonOptions
+
+        &:hover
+            background-color: transparent
+            border-radius: 0px
+
+@media screen and (max-width: 1400px)
+    .main__container
+        padding: 0 15px 0 15px
+
+@media screen and (max-width: 1220px)
+    .content__submain
+        padding: 30px 10px 0 15px
+
+@media screen and (max-width: 1290px)
+    .main__title
+        line-height: 105px
+
+@media screen and (max-width: 950px)
+    .slider__brand
+        max-width: 400px
+        max-height: 285px
+
+@media screen and (max-width: 768px)
+    .logo
+        width: 210px
+        min-height: 105px
+
+        &__title
+            font-size: 17px
+
+    .main
+        &__title
+            font-size: 85px
+        &__item
+            padding: 12.5px 0
+
+            &:hover
+                border-top: 1px solid rgba(255, 255, 255, .5)
+                border-bottom: 1px solid rgba(255, 255, 255, .5)
+                color: rgba(255, 255, 255, .5)
+
+        &__span
+            font-size: 28px
+        &__container
+            position: fixed
+            bottom: calc(3px + 3vh)
+
+    .content
+        position: fixed
+
+        &__title
+            font-size: 45px
+        &__question
+            font-size: 19px
+        &__icon
+            font-size: 65px
+        &__arrow
+            transition: none
+        &__circle
+            transition: none
+
+            &:hover
+                background-color: transparent
+            &:hover .content__arrow
+                color: $blueColor
+
+        &__car
+            min-width: 360px
+            max-width: 360px
+            transition: none
+
+            &:hover
+                background-color: transparent
+            &:hover .content__carImg
+                opacity: 1
+                filter: none
+            &:hover .content__cover
+                visibility: hidden
+            &:hover .content__carModel
+                display: block
+
+        &__carImg
+            transition: none    
+        &__cover
+            display: none
+        &__modal
+            max-width: none
+            overflow-y: scroll
+            height: 100%
+            justify-content: flex-start
+            padding: 45px 0 10px 0
+            position: fixed
+            top: 0
+        &__modalImg
+            margin-top: 10px
+        &__modalChars
+            transition: none
+
+            &:hover
+                background-color: $skyColor
+
+        &__modalCircle
+            transition: none
+
+            &:hover
+                background-color: transparent
+            &:hover .content__arrow
+                color: $blueColor
+
+        &__modalBtn
+            transition: none
+
+            &:hover
+                background-color: $blueColor
+                border-radius: 5px
+                color: white
+            &_style
+                &:hover
+                    background-color: limegreen
+
+        &__modalAccountTitle
+            font-size: 32px
+        &__modalCircle:hover .content__back
+            color: $blueColor
+        &__modalAccountInput
+            transition: none
+
+            &:hover
+                background-color: $blackColor
+
+        &__modalAccountSubmit
+            transition: none
+
+            &:hover
+                background-color: $blueColor
+                border-radius: 5px
+                color: white
+
+        &__accountForm
+            width: 60%
+        &__accountInput
+            transition: none
+
+            &:hover
+                background-color: $blackColor
+
+        &__accountHelp
+            transition: none
+
+            &:hover
+                color: $skyColor
+
+        &__accountSubmit
+            transition: none
+
+            &:hover
+                background-color: limegreen
+                border-radius: 5px
+                color: white
+
+        &__accountButton
+            transition: none
+
+            &:hover
+                background-color: $blueColor
+                border-radius: 5px
+                color: white
+
+        &__modalAccountSpan
+            transition: none
+
+            &:hover
+                color: $blackColor
+
+        &__arrow_style
+            transition: none
+
+            &:hover
+                color: white
+
+        &__signedButton
+            transition: none
+
+            &:hover
+                background-color: $blueColor
+                color: white 
+                border-radius: 5px
+
+        &__signedDelete
+            transition: none
+
+            &:hover
+                color: $blackColor
+
+        &__signedExit
+            transition: none
+
+            &:hover 
+                color: white
+                border-radius: 5px
+                background-color: red
+
+        &__signedInput
+            transition: none
+
+            &:hover
+                background-color: $blackColor
+
+        &__question
+            transition: none
+
+            &:hover
+                background-color: $skyColor
+        
+        &__input
+            transition: none
+
+            &:hover
+                background-color: $blackColor
+
+        &__submit
+            transition: none
+
+            &:hover
+                background-color: $blueColor
+                color: white
+                border-radius: 5px
+
+        &__ref
+            transition: none
+
+            &:hover
+                background-color: $blackColor
+
+    .slider
+        &__button
+            transition: none
+
+            &:hover
+                background-color: $blueColor
+                border-radius: 5px
+
+        &__brand
+            max-width: 350px
+            max-height: 260px
+
+    .buttonUp
+        transition: none
+        right: 35px
+        bottom: 35px
+
+        &:hover
+            background-color: transparent
+        &:hover .content__arrow
+            color: $blueColor
+
+@media screen and (max-width: 700px)
+    .main__title
+        font-size: 70px
+        text-align: center
+        line-height: 95px
+        padding: 0 10px 0 10px
+
+    .logo
+        top: 20px
+
+@media screen and (max-width: 650px)
+    .slider__brand
+        max-width: 335px
+        max-height: 250px
+
+    .content
+        &__signed
+            padding: 15px 0 10px 0
+        &__signedControls
+            flex-direction: column
+            align-items: center
+        &__signedInfo
+            padding: 15px 0 0 0
+        &__signedBtn
+            max-width: 356px
+        &__submain
+            padding: 25px 10px 0 15px
+
+@media screen and (max-width: 625px)
+    .slider__brand
+        max-width: 325px
+        max-height: 230px
+
+    .content__message
+        right: 10px
+
+@media screen and (max-width: 580px)
+    .slider__brand
+        max-width: 300px
+        max-height: 200px
+
+    .main__span
+        font-size: 25px
+
+@media screen and (max-width: 560px)
+    .logo
+        width: 180px
+        min-height: 85px
+
+        &__title
+            font-size: 15px
+    
+    .main
+        &__container
+            padding: 0
+            max-width: none
+        &__title
+            font-size: 65px
+            line-height: 85px
+        &__item
+            padding: 6.5px 0
+
+    .content
+        &__title
+            font-size: 40px
+        &__h2
+            font-size: 32px
+        &__text
+            padding: 15px 0 0 20px
+        &__features
+            flex-direction: column
+            padding: 30px 0 0 0
+        &__feature
+            padding-top: 30px
+
+            &:first-child
+                padding-top: 0
+
+        &__car
+            margin-top: 20px
+        &__carModel
+            padding-left: 0
+        &__modalTitle
+            font-size: 20px
+        &__modalImg
+            max-width: 280px
+            height: 200px
+        &__modalPrice
+            font-size: 20px
+        &__modalAccordeon
+            width: 70%
+            padding: 15px 0 20px 0
+        &__modalItem
+            flex-direction: column
+            align-items: center
+        &__modalExtra
+            padding-right: 0
+            text-align: center
+        &__modalButtons
+            display: flex
+            flex-direction: column
+        &__modalBtn
+            margin: 12.5px 0 0 0
+
+            &:first-child
+                margin-top: 0
+
+        &__modalAccountTitle
+            font-size: 28px
+        &__modalAccountInputs
+            width: 80%
+        &__modalAccountSubmit
+            width: 80%
+        &__question
+            font-size: 18px
+        &__accordeon
+            width: 85%
+        &__form
+            width: 85%
+        &__btn
+            flex-direction: column
+        &__links
+            padding-top: 15px
+        &__link:first-child
+            padding-left: 0
+        &__accountForm
+            width: 70%
+        &__modalAccountSubmain
+            padding-top: 18.5px
+        &__modalCircle
+            top: 12.5px
+
+    .preloader__box
+        width: 70px
+        height: 70px
+
+@media screen and (max-width: 525px)
+    .main__span
+        font-size: 22px
+
+    .slider__brand
+        max-width: 285px
+        max-height: 180px
+
+    .content__message
+        left: 5px
+        right: 5px
+        padding: 10px 20px 10px 15px
+
+@media screen and (max-width: 485px)
+    .slider__brand
+        max-width: 275px
+        max-height: 165px
+
+@media screen and (max-width: 460px)
+    .main
+        &__title
+            line-height: 75px
+            font-size: 60px
+        &__span
+            font-size: 20px
+
+    .content
+        &__title
+            font-size: 35px
+        &__h2
+            font-size: 28px
+        &__span
+            font-size: 20px
+        &__icon
+            font-size: 60px
+        &__note
+            font-size: 18px
+        &__text
+            padding: 15px 0 0 0
+        &__modal_style
+            padding-top: 35px !important
+        &__modalAccountTitle
+            font-size: 26px
+        &__modalAccountCaption
+            font-size: 17px
+        &__accountForm
+            width: 75%
+        &__accountStay
+            flex-direction: column
+        &__accountHelp
+            margin-top: 7.5px
+        &__accountBlock
+            justify-content: center
+        &__accountButton
+            width: 100%
+
+    .slider__brand
+        max-width: 270px
+        max-height: 150px
+
+    .buttonUp
+        right: 30px
+        bottom: 30px
+
+@media screen and (max-width: 435px)
+    .slider__brand
+        max-width: 260px
+        max-height: 140px
+
+@media screen and (max-width: 420px)
+    .main
+        &__title
+            font-size: 55px
+        &__span
+            font-size: 18px
+
+    .slider__brand
+        max-width: 255px
+        max-height: 135px
+
+    .content__car
+        min-width: 325px
+        max-width: 325px
+        min-height: 240px
+        max-height: 240px
+        
+    .content
+        &__modalImg
+            max-width: 270px
+        &__modalAccordeon
+            width: 75%
+
+@media screen and (max-width: 405px)
+    .slider__brand
+        max-width: 250px
+        max-height: 125px
+
+    .preloader
+        &__content
+            width: 325px
+        &__box
+            width: 43.5px
+            height: 43.5px
+            animation: adaptiveFirstBox 2.5s infinite
+
+            &_animation
+                animation: adaptiveSecondBox 2.5s infinite
+
+@media screen and (max-width: 390px)
+    .main
+        &__title
+            line-height: 70px
+            font-size: 50px
+        &__span
+            font-size: 16px
+
+    .content
+        &__title
+            font-size: 32px
+        &__h2
+            font-size: 25px
+        &__span
+            font-size: 18px
+        &__icon
+            font-size: 57px
+        &__text
+            font-size: 18px
+        &__signedInputs
+            &_style
+                flex-direction: column
+                align-items: center
+                padding-top: 20px
+            &_align
+                text-align: center
+    
+        &__signedButton
+            width: 100%
+
+            &:last-child
+                margin: 12.5px 0 0 0
+
+    .slider__brand
+        max-width: 245px
+        max-height: 120px
+
+    .buttonUp
+        right: 25px
+        bottom: 25px
+
+    .preloader
+        &__content
+            width: 300px
+
+@media screen and (max-width: 375px)
+    .slider__brand
+        max-width: 235px
+        max-height: 110px
+
+    .content
+        &__text
+            font-size: 17.5px
+        &__accountForm
+            width: 80%
+
+@media screen and (max-width: 360px)
+    .main
+        &__title
+            line-height: 65px
+            font-size: 45px
+        &__span
+            font-size: 14.5px
+
+    .content
+        &__title
+            font-size: 30px
+        &__h2
+            font-size: 23px
+        &__span
+            font-size: 16px
+        &__icon
+            font-size: 53.5px
+        &__text
+            font-size: 16.5px
+        &__note
+            font-size: 16.5px
+        &__car
+            min-width: 300px
+            max-width: 300px
+            margin-top: 10px
+        &__carModel
+            font-size: 18px
+        &__modalAccountTitle
+            font-size: 24.5px
+        &__modalAccountCaption
+            font-size: 16.5px
+        &__map
+            display: none
+        &__question
+            font-size: 17px
+
+    .slider
+        &__brand
+            max-width: 230px
+            max-height: 105px
+        &__button
+            padding: 11.5px 18.5px 11.5px 18.5px
+
+    .buttonUp
+        right: 18.5px
+        bottom: 18.5px
+
+    .preloader
+        &__content
+            width: 290px
+
+@media screen and (max-width: 350px)
+    .slider__brand
+        max-width: 225px
+        max-height: 100px
+
+@media screen and (max-width: 340px)
+    .slider__brand
+        max-width: 220px
+        max-height: 90px
+
+@media screen and (max-width: 320px)
+    .main
+        &__title
+            line-height: 62.5px
+            font-size: 42px
+        &__span
+            font-size: 14px
+
+    .content
+        &__title
+            font-size: 28px
+        &__h2
+            font-size: 21px
+        &__span
+            font-size: 14.5px
+        &__icon
+            font-size: 50px
+        &__text
+            font-size: 15px
+        &__note
+            font-size: 15px
+        &__modalAccountTitle
+            font-size: 26px
+        &__modalAccountCaption
+            font-size: 16px
+        &__message
+            padding: 10px 20px 10px 6.5px
+        &__question
+            font-size: 16px
+        &__accountForm
+            width: 85%
+
+    .slider__brand
+        max-width: 210px
+        max-height: 80px
+
+@keyframes firstBox
+    0%
+        top: 0
+        left: 0
+
+    25%
+        width: 50px
+        height: 50px
+        left: calc(100% - 50px)
+        top: 0
+        transform: rotate(-90deg)
+
+    50%
+        width: 75px
+        height: 75px
+        left: calc(100% - 75px)
+        top: calc(100% - 75px)
+        transform: rotate(90deg)
+
+    75%
+        width: 50px
+        height: 50px
+        left: 0px
+        top: calc(100% - 50px)
+        transform: rotate(-90deg)
+
+    100%
+        left: 0
+        top: 0
+
+@keyframes secondBox
+    0%
+        right: 0
+        bottom: 0
+
+    25%
+        width: 50px
+        height: 50px
+        right: calc(100% - 50px)
+        bottom: 0
+        transform: rotate(-90deg)
+
+    50%
+        width: 75px
+        height: 75px
+        right: calc(100% - 75px)
+        bottom: calc(100% - 75px)
+        transform: rotate(90deg)
+
+    75%
+        width: 50px
+        height: 50px
+        right: 0px
+        bottom: calc(100% - 50px)
+        transform: rotate(-90deg)
+
+    100%
+        right: 0
+        bottom: 0
+
+@keyframes adaptiveFirstBox
+    0%
+        top: 0
+        left: 0
+
+    25%
+        width: 58.5px
+        height: 58.5px
+        left: calc(100% - 58.5px)
+        top: 0
+        transform: rotate(-90deg)
+
+    50%
+        width: 43.5px
+        height: 43.5px
+        left: calc(100% - 43.5px)
+        top: calc(100% - 43.5px)
+        transform: rotate(90deg)
+
+    75%
+        width: 58.5px
+        height: 58.5px
+        left: 0px
+        top: calc(100% - 58.5px)
+        transform: rotate(-90deg)
+
+    100%
+        left: 0
+        top: 0
+
+@keyframes adaptiveSecondBox
+    0%
+        right: 0
+        bottom: 0
+
+    25%
+        width: 58.5px
+        height: 58.5px
+        right: calc(100% - 58.5px)
+        bottom: 0
+        transform: rotate(-90deg)
+
+    50%
+        width: 43.5px
+        height: 43.5px
+        right: calc(100% - 43.5px)
+        bottom: calc(100% - 43.5px)
+        transform: rotate(90deg)
+
+    75%
+        width: 58.5px
+        height: 58.5px
+        right: 0px
+        bottom: calc(100% - 58.5px)
+        transform: rotate(-90deg)
+
+    100%
+        right: 0
+        bottom: 0
+
+@keyframes Greeting
+    0%
+        transform: translateY(-10px)
+        opacity: 0
+    100%
+        transform: translateY(-30px)
+        opacity: .7
+
+@keyframes enableSubstrate
+    0%
+        background-color: transparent
+    100%
+        background-color: rgba(0, 0, 0, .4)
+
+@keyframes showContent
+    0%
+        visibility: hidden
+        transform: translateY(100%)
+    100%
+        visibility: visible
+        transform: translateY(0px)
+
+@keyframes hideContent
+    0%
+        visibility: visible
+        transform: translateY(0px)
+    100%
+        visibility: hidden
+        transform: translateY(100%)
+
+@keyframes showModal
+    0%
+        visibility: hidden
+        opacity: 0
+        transform: translateX(-150%)
+    100%
+        visibility: visible
+        opacity: 1
+        transform: translateX(0px)
+
+@keyframes hideModal
+    0%
+        visibility: visible
+        opacity: 1
+        transform: translateX(0px)
+    100%
+        visibility: hidden
+        opacity: 0
+        transform: translateX(150%)
+
+@keyframes enableModalCover
+    0%
+        visibility: hidden
+        background-color: rgba(0, 0, 0, 0)
+    100%
+        visibility: visible
+        background-color: rgba(30, 30, 30, .9)
+
+@keyframes disableModalCover
+    0%
+        visibility: visible
+        background-color: rgba(30, 30, 30, .9)
+    100%
+        visibility: hidden
+        background-color: rgba(0, 0, 0, 0)
